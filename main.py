@@ -1,6 +1,6 @@
 import socket
 import threading
-import pyperclip
+import pyperclip    
 import time
 import uuid
 import random
@@ -91,7 +91,7 @@ def custom_error_popup(title, message):
     # Message Label
     message_label = tk.Label(error_window, text=message, bg="#ff4a38", fg="#000000",
                              font=("Helvetica", 12, "bold"), wraplength=350, justify='center')
-    message_label.pack(pady=40)
+    message_label.pack(pady=40 )
 
     # OK Button
     ok_button = tk.Button(error_window, text="OK", command=error_window.destroy,
@@ -336,6 +336,40 @@ def update_connected_users_display():
         display_username = info.get('username', 'Unknown')
         connected_users_tree.insert('', 'end', values=(display_username, ip, info['port'], info.get('copy_count', 0)))
 
+# Move these functions to the global scope
+def save_clipboard_log(username, copied_text):
+    """Saves clipboard logs in the format: $username $time $copied text."""
+    time_stamp = time.strftime("%Y-%m-%d %H:%M:%S", time.localtime())
+    log_entry = f"{username} {time_stamp} {copied_text}"
+    with open('clipboard_logs.txt', 'a') as log_file:
+        log_file.write(log_entry + '\n')
+
+# Declare log_text as a global variable
+log_text = None
+
+def log_activity(user, message):
+    """Logs clipboard activities in the GUI with the user's color."""
+    global log_text
+    if log_text is None:
+        logging.error("log_text widget is not initialized.")
+        return
+
+    log_text.config(state='normal')
+    if user in user_colors:
+        color = user_colors[user]
+    else:
+        color = get_next_color()
+        user_colors[user] = color
+    log_text.tag_config(user, foreground=color, font=("Helvetica", 10, "bold"))
+    # Updated log entry format
+    log_entry = f"{user} {time.strftime('%Y-%m-%d %H:%M:%S')} {message}\n"
+    log_text.insert(tk.END, log_entry, user)
+    log_text.config(state='disabled')
+    log_text.yview(tk.END)
+    logging.info(log_entry.strip())  # Log to the file
+    # Save clipboard log
+    save_clipboard_log(user, message)
+
 # GUI Setup
 def main():
     global root, username, connected_users_tree, log_text, pause_button, tray_icon
@@ -469,29 +503,15 @@ def main():
     log_frame = tk.Frame(root, bg="#70a9c8")
     log_frame.pack(pady=10, fill=tk.BOTH, expand=True)
 
-    log_label = tk.Label(log_frame, text="📝 Connection Logs:", font=("Helvetica", 12, "bold"),
+    log_label = tk.Label(log_frame, text="📝 Clipboard Logs:", font=("Helvetica", 12, "bold"),
                          bg="#70a9c8")
     log_label.pack(anchor='w')
 
+    # Initialize log_text as a global variable
+    global log_text
     log_text = scrolledtext.ScrolledText(log_frame, wrap=tk.WORD, state='disabled', height=10,
                                         bg="#ffffff", fg="#000000", font=("Helvetica", 10, "bold"))
     log_text.pack(fill=tk.BOTH, expand=True)
-
-    # Function to log activities with colors
-    def log_activity(user, message):
-        """Logs activities in the GUI with the user's color."""
-        log_text.config(state='normal')
-        if user in user_colors:
-            color = user_colors[user]
-        else:
-            color = get_next_color()
-            user_colors[user] = color
-        log_text.tag_config(user, foreground=color, font=("Helvetica", 10, "bold"))
-        log_entry = f"{user}: {message}\n"
-        log_text.insert(tk.END, log_entry, user)
-        log_text.config(state='disabled')
-        log_text.yview(tk.END)
-        logging.info(log_entry.strip())  # Add this line to log to the file
 
     # Add a Treeview to display connected users
     connected_users_label = tk.Label(root, text="👥 Connected Users:", font=("Helvetica", 12, "bold"),

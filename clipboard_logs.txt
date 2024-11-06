@@ -1,0 +1,20 @@
+ChuckleCharm 2024-11-06 13:05:51 Connected from 192.168.1.20:15413
+ChuckleCharm 2024-11-06 13:05:51 Changed username from ChuckleCharm to ChuckleCharm
+ChuckleCharm 2024-11-06 13:06:32 Copied:         tray_thread = threading.Thread(target=tray_icon.run, daemon=True)
+
+ChuckleCharm 2024-11-06 13:08:42 Connected from 192.168.1.20:15413
+ChuckleCharm 2024-11-06 13:08:42 Changed username from ChuckleCharm to ChuckleCharm
+ScrollSorcerer 2024-11-06 13:19:53 Connected from 192.168.1.20:15413
+ScrollSorcerer 2024-11-06 13:19:53 Changed username from ScrollSorcerer to ScrollSorcerer
+TypoTitan 2024-11-06 13:19:57 Changed username from ScrollSorcerer to TypoTitan
+LaughingLetter 2024-11-06 13:19:58 Changed username from TypoTitan to LaughingLetter
+LaughingLetter 2024-11-06 13:20:26 Copied: openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+
+LaughingLetter 2024-11-06 13:20:28 Copied: openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+
+LaughingLetter 2024-11-06 13:20:30 Copied: To create a self-signed certificate with OpenSSL:
+bash
+Copied!
+
+LaughingLetter 2024-11-06 13:20:35 Copied: openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
+
