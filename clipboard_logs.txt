@@ -18,3 +18,69 @@ Copied!
 
 LaughingLetter 2024-11-06 13:20:35 Copied: openssl req -x509 -newkey rsa:4096 -keyout key.pem -out cert.pem -days 365
 
+PunctuationPirate 2024-11-06 13:25:44 Connected with 192.168.1.20:15413
+LaughingLetter 2024-11-06 13:25:45 Changed username from Unknown to LaughingLetter
+LaughingLetter 2024-11-06 13:28:23 Copied:  class c 
+LaughingLetter 2024-11-06 13:30:08 Copied: 192.168.0.0 to 192.168.255.255
+LaughingLetter 2024-11-06 14:11:56 Copied: Lunar_edge1991
+LaughingLetter 2024-11-06 14:42:02 Copied: ssh <username>@<ip_address> -p 5000
+ssh <username>@<ip_address> -p 7000
+ssh <username>@<ip_address> -p 49152
+
+LaughingLetter 2024-11-06 14:43:57 Copied: npm install http-server -g
+LaughingLetter 2024-11-06 14:55:17 Copied: http://192.168.1.4:5500/
+LaughingLetter 2024-11-06 14:58:09 Copied: http://192.168.1.4:5501/Qr%20Tech.html
+LaughingLetter 2024-11-06 15:00:40 Copied: Camera
+Blocked to protect your privacy
+
+Block
+Microphone
+LaughingLetter 2024-11-06 15:01:48 Copied: chrome://settings/content/camera
+LaughingLetter 2024-11-06 15:02:55 Copied: Insecure origins treated as secure
+LaughingLetter 2024-11-06 15:03:03 Copied: http://192.168.1.4:5500/
+LaughingLetter 2024-11-06 15:03:28 Copied: Insecure origins treated as secure
+LaughingLetter 2024-11-06 15:05:08 Copied: http://192.168.1.4:5500/
+PunctuationPirate 2024-11-06 15:20:48 Connected with 192.168.1.20:15413
+ByteBandit 2024-11-06 15:20:48 Changed username from Unknown to ByteBandit
+WordWhiskers 2024-11-06 15:20:51 Changed username from ByteBandit to WordWhiskers
+SnappyScript 2024-11-06 15:20:52 Changed username from WordWhiskers to SnappyScript
+LOLLinguist 2024-11-06 15:20:52 Changed username from SnappyScript to LOLLinguist
+TypoTreasure 2024-11-06 15:20:54 Changed username from LOLLinguist to TypoTreasure
+TypoTreasure 2024-11-06 15:35:00 Copied: port 17032
+TypoTreasure 2024-11-06 15:47:23 Copied: create another function for 3 way handshake which will run ragularly on a static port 17032 where the program send Syc request to the ip range 192.168.1.0 to 192.168.1.255 continusly and when a another ip is also running the same script it then it will respond with a then send a ack with username so that the the tool can show all the avelable users online on the tool that can connect and show a button to directely send a connection request
+TypoTreasure 2024-11-06 15:52:33 Copied: Create a function for a 3-way handshake that operates continuously on a static port (17032). This function should:
+
+Regularly send SYN requests to the IP range 192.168.1.0 - 192.168.1.255.
+Upon detecting another IP in the range running the same script, complete the handshake by sending an ACK that includes the local username.
+Display a list of active users online in the tool, each with a button to directly send a connection request.
+
+TypoTreasure 2024-11-06 15:52:40 Copied: Create a function for a 3-way handshake that operates continuously on a static port (17032). This function should:
+
+Regularly send SYN requests to the IP range 192.168.1.0 - 192.168.1.255.
+Upon detecting another IP in the range running the same script, complete the handshake by sending an ACK that includes the local username.
+Display a list of active users online in the tool, each with a button to directly send a connection request.
+The goal is to maintain a continuously updated list of available users who can connect directly via the tool.
+
+
+
+
+
+
+
+HappyTypo 2024-11-06 15:59:26 Connected with 192.168.1.20:15413
+S'morePixels 2024-11-06 15:59:26 Changed username from Unknown to S'morePixels
+FableFrolic 2024-11-06 15:59:31 Changed username from S'morePixels to FableFrolic
+GigabyteGiggler 2024-11-06 15:59:32 Changed username from FableFrolic to GigabyteGiggler
+GigabyteGiggler 2024-11-06 15:59:50 Copied: PS C:\Users\KAUSH\Music\clipboard> python main.py Traceback (most recent call last): File "C:\Users\KAUSH\Music\clipboard\main.py", line 714, in <module> main() File "C:\Users\KAUSH\Music\clipboard\main.py", line 612, in main active_users_tree.bind("<ButtonRelease-1>", send_connection_request_button) ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^ UnboundLocalError: cannot access local variable 'send_connection_request_button' where it is not associated with a value
+
+
+BuzzingBeeps 2024-11-06 16:01:39 Connected with 192.168.1.20:15413
+ByteBandit 2024-11-06 16:01:39 Changed username from Unknown to ByteBandit
+ByteBandit 2024-11-06 16:02:23 Connected from 192.168.1.20:15413
+ByteBandit 2024-11-06 16:02:23 Changed username from ByteBandit to ByteBandit
+ByteBandit 2024-11-06 16:02:54 Connected from 192.168.1.20:15413
+ByteBandit 2024-11-06 16:02:54 Changed username from ByteBandit to ByteBandit
+ByteBandit 2024-11-06 16:02:55 Connected from 192.168.1.20:15413
+ByteBandit 2024-11-06 16:02:55 Changed username from ByteBandit to ByteBandit
+ByteBandit 2024-11-06 16:03:32 Connected from 192.168.1.20:15413
+ByteBandit 2024-11-06 16:03:32 Changed username from ByteBandit to ByteBandit

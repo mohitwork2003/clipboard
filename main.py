@@ -327,6 +327,9 @@ def start_threads():
     threading.Thread(target=handle_connection_requests, daemon=True).start()
     # Start a thread to handle connection responses and username updates
     threading.Thread(target=handle_connection_responses, daemon=True).start()
+    # Start handshake threads
+    threading.Thread(target=three_way_handshake, daemon=True).start()
+    threading.Thread(target=listen_handshake, daemon=True).start()
 
 def update_connected_users_display():
     """Updates the connected users table in the GUI."""
@@ -370,9 +373,77 @@ def log_activity(user, message):
     # Save clipboard log
     save_clipboard_log(user, message)
 
+# Constants for 3-way handshake
+HANDSHAKE_PORT = 17032
+HANDSHAKE_IP_RANGE = [f"192.168.1.{i}" for i in range(1, 256)]
+
+# Dictionary to store active users from handshake
+active_users = {}
+
+def three_way_handshake():
+    """Continuously perform a 3-way handshake on port 17032."""
+    while True:
+        # Send SYN to each IP in the range
+        for ip in HANDSHAKE_IP_RANGE:
+            threading.Thread(target=send_syn, args=(ip,), daemon=True).start()
+        time.sleep(5)  # Wait before next round
+
+def send_syn(target_ip):
+    """Send a SYN request to the target IP."""
+    try:
+        sock = socket.socket(socket.AF_INET, socket.SOCK_STREAM)
+        sock.settimeout(1)
+        sock.connect((target_ip, HANDSHAKE_PORT))
+        sock.sendall(f"SYN:{instance_id}".encode('utf-8'))
+        response = sock.recv(1024).decode('utf-8')
+        if response.startswith("SYN-ACK"):
+            _, responder_id = response.split(':', 1)
+            with clipboard_lock:
+                active_users[responder_id] = target_ip
+            sock.sendall(f"ACK:{username}".encode('utf-8'))
+            update_active_users_display()
+    except:
+        pass
+    finally:
+        sock.close()
+
+def listen_handshake():
+    """Listen for incoming handshake requests on port 17032."""
+    with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as server_sock:
+        server_sock.bind(('', HANDSHAKE_PORT))
+        server_sock.listen()
+        while True:
+            conn, addr = server_sock.accept()
+            threading.Thread(target=handle_handshake, args=(conn, addr), daemon=True).start()
+
+def handle_handshake(conn, addr):
+    """Handle incoming handshake messages."""
+    try:
+        data = conn.recv(1024).decode('utf-8')
+        if data.startswith("SYN"):
+            _, sender_id = data.split(':', 1)
+            conn.sendall(f"SYN-ACK:{instance_id}".encode('utf-8'))
+            ack = conn.recv(1024).decode('utf-8')
+            if ack.startswith("ACK"):
+                _, sender_username = ack.split(':', 1)
+                with clipboard_lock:
+                    active_users[sender_username] = addr[0]
+                update_active_users_display()
+    except:
+        pass
+    finally:
+        conn.close()
+
+def update_active_users_display():
+    """Update the GUI with the list of active users."""
+    for i in active_users_tree.get_children():
+        active_users_tree.delete(i)
+    for user, ip in active_users.items():
+        active_users_tree.insert('', 'end', values=(user, ip, "Connect"))
+
 # GUI Setup
 def main():
-    global root, username, connected_users_tree, log_text, pause_button, tray_icon
+    global root, username, connected_users_tree, log_text, pause_button, tray_icon, active_users_tree
 
     root = tk.Tk()
     root.title("ClipHilarity Sync")
@@ -524,6 +595,28 @@ def main():
     connected_users_tree.heading("Port", text="Port")
     connected_users_tree.heading("Copy Count", text="Copy Count")
     connected_users_tree.pack(pady=5, fill=tk.BOTH, expand=True)
+
+    # Add a label for Active Users
+    active_users_label = tk.Label(root, text="🌐 Active Users:", font=("Helvetica", 12, "bold"),
+                                  bg="#70a9c8")
+    active_users_label.pack(pady=5)
+
+    # Add a Treeview to display active users from handshake
+    active_users_tree = ttk.Treeview(root, columns=("Username", "IP Address", "Action"), show='headings')
+    active_users_tree.heading("Username", text="Username")
+    active_users_tree.heading("IP Address", text="IP Address")
+    active_users_tree.heading("Action", text="Action")
+    active_users_tree.pack(pady=5, fill=tk.BOTH, expand=True)
+
+    def send_connection_request_button(event):
+        selected_item = active_users_tree.focus()
+        if selected_item:
+            user, ip, action = active_users_tree.item(selected_item, 'values')
+            if action == "Connect":
+                send_connection_request(ip)
+
+    # Bind the action button
+    active_users_tree.bind("<ButtonRelease-1>", send_connection_request_button)
 
     # Start threads for clipboard sync and connection handling are initiated after setting username and port
 
