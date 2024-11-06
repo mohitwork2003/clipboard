@@ -270,3 +270,11 @@ GigabyteGiggler 2024-11-06 16:20:39 Copied: Create a great Readme file for githu
 GigabyteGiggler 2024-11-06 16:22:15 Copied: Create a great Readme.md file for github repo of this Sync Clipboard the Name of this project is ClipNet and every other funcnality you can fatch from main.py and write the readme.md for this
 
 
+GigabyteGiggler 2024-11-06 16:34:46 Copied: https://github.com/mohitwork2003/clipboard.git
+GigabyteGiggler 2024-11-06 16:40:46 Copied: pyperclip
+GigabyteGiggler 2024-11-06 16:41:26 Copied: Pillow
+pystray
+pyperclip
+GigabyteGiggler 2024-11-06 16:41:39 Copied: Pillow
+pystray
+pyperclip
